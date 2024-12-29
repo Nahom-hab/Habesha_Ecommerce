@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 // Replace with your bot token and channel username
 const BOT_TOKEN = '8028749136:AAH6og7aTJGQOd7uqyFjdDQfdZwFpzlxLcE';

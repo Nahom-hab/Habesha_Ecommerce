@@ -1,8 +1,8 @@
-import uploadImageToCloudinary from "../config/UploadToClaudinary.js";
-import Order from "../models/order.js";
+const uploadImageToCloudinary = require("../config/UploadToClaudinary");
+const Order = require("../models/order");
 
 // Create a new order
-export const createOrder = async (req, res) => {
+const createOrder = async (req, res) => {
     try {
         const { fullName, phoneNumber, selectedBank, address, totalPrice, order } = req.body;
         const receipt = req.files?.[0];
@@ -15,12 +15,12 @@ export const createOrder = async (req, res) => {
         const newOrder = new Order({
             fullName,
             phoneNumber,
-            address, // Corrected field
+            address,
             selectedBank,
             totalPrice,
             order: JSON.parse(order),
             bankRecipt: imageUrl,
-            order_status: 'pending'
+            order_status: 'pending',
         });
 
         const savedOrder = await newOrder.save();
@@ -31,7 +31,7 @@ export const createOrder = async (req, res) => {
 };
 
 // Get all orders
-export const getAllOrders = async (req, res) => {
+const getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find();
         res.status(200).json(orders);
@@ -41,7 +41,7 @@ export const getAllOrders = async (req, res) => {
 };
 
 // Get a single order by ID
-export const getOrderById = async (req, res) => {
+const getOrderById = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
         if (!order) {
@@ -54,7 +54,7 @@ export const getOrderById = async (req, res) => {
 };
 
 // Update an order by ID
-export const updateOrder = async (req, res) => {
+const updateOrder = async (req, res) => {
     try {
         const updatedOrder = await Order.findByIdAndUpdate(
             req.params.id,
@@ -72,7 +72,7 @@ export const updateOrder = async (req, res) => {
 };
 
 // Update order status
-export const updateOrderStatus = async (req, res) => {
+const updateOrderStatus = async (req, res) => {
     try {
         const { order_status } = req.body;
 
@@ -96,7 +96,7 @@ export const updateOrderStatus = async (req, res) => {
 };
 
 // Delete an order by ID
-export const deleteOrder = async (req, res) => {
+const deleteOrder = async (req, res) => {
     try {
         const deletedOrder = await Order.findByIdAndDelete(req.params.id);
         if (!deletedOrder) {
@@ -106,4 +106,13 @@ export const deleteOrder = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+module.exports = {
+    createOrder,
+    getAllOrders,
+    getOrderById,
+    updateOrder,
+    updateOrderStatus,
+    deleteOrder,
 };

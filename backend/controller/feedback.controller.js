@@ -1,7 +1,7 @@
-import Feedback from "../models/feedback.js";
+const Feedback = require("../models/feedback");
 
 // Create feedback
-export const createFeedback = async (req, res) => {
+const createFeedback = async (req, res) => {
     try {
         const { name, phoneNumber, email, message } = req.body;
 
@@ -17,11 +17,18 @@ export const createFeedback = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-export const getFeedbacks = async (req, res) => {
+
+// Get feedbacks
+const getFeedbacks = async (req, res) => {
     try {
         const feedbacks = await Feedback.find();
         res.status(200).json(feedbacks);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+module.exports = {
+    createFeedback,
+    getFeedbacks,
 };

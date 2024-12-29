@@ -1,12 +1,7 @@
-import express from "express";
-import {
-    createOrder,
-    getAllOrders,
-    getOrderById,
-    updateOrder,
-    deleteOrder
-} from '../controller/order.controller.js'
-import multer from 'multer'
+const express = require("express");
+const multer = require('multer');
+const { createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder } = require('../controller/order.controller.js');
+
 const upload = multer();
 const router = express.Router();
 
@@ -25,4 +20,4 @@ router.put("/:id", updateOrder);
 // Delete an order by ID
 router.delete("/:id", deleteOrder);
 
-export default router;
+module.exports = router;

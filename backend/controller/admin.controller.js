@@ -1,8 +1,8 @@
-import Admin from '../models/admin.js';
-import jwt from 'jsonwebtoken';
+const Admin = require('../models/admin');
+const jwt = require('jsonwebtoken');
 
 // Signup
-export const signup = async (req, res) => {
+const signup = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
@@ -31,7 +31,8 @@ export const signup = async (req, res) => {
     }
 };
 
-export const login = async (req, res) => {
+// Login
+const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -62,3 +63,7 @@ export const login = async (req, res) => {
     }
 };
 
+module.exports = {
+    signup,
+    login,
+};

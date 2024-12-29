@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+const mongoose = require('mongoose');
 
 const FeedBackSchema = mongoose.Schema({
     name: {
@@ -11,16 +11,15 @@ const FeedBackSchema = mongoose.Schema({
     },
     email: {
         type: String,
-    }
-    ,
+    },
     message: {
         type: String,
         required: true
     }
 }, {
     timestamps: true
-})
+});
 
-const Feedback = mongoose.model('Feedback', FeedBackSchema)
+const Feedback = mongoose.model('Feedback', FeedBackSchema);
 
-export default Feedback
+module.exports = Feedback;

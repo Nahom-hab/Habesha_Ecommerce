@@ -1,13 +1,11 @@
-import express from 'express';
-import multer from 'multer';
-import cloudinary from '../middelwere/cloudinary.config.js';
+const express = require('express');
+const multer = require('multer');
+const cloudinary = require('../middelwere/cloudinary.config.js');
 
 const router = express.Router();
 
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-
 
 router.post('/', upload.array('images', 5), (req, res) => {
     const files = req.files; // Access the uploaded files correctly
@@ -53,4 +51,4 @@ router.post('/', upload.array('images', 5), (req, res) => {
         });
 });
 
-export default router;
+module.exports = router;
